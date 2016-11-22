@@ -29,6 +29,15 @@ def calculate_depth_simple(B, rho):
     d = (rho * mu_0 * mu_0 * mu_p * mu_p * 5 / (1536 * np.pi * B * B))**(1./3)
     d = d*1e9
     return d
+    
+    
+def get_data(filename):
+    #TODO: needs to be implemented in a good and robust way
+    data = np.loadtxt(filename)
+    x = data[:,0]
+    y = data[:,1]
+    return x, y
+    
 
     def load_file(self, filepath):
         """ loads the data from a file that has a 2 column structure
