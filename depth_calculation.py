@@ -32,7 +32,7 @@ def calculate_depth_simple(B, rho):
     
     
 def get_data(filename, data_columns):
-    #TODO: needs to be implemented in a good and robust way
+    '''importing data with two or three columns'''
     data = np.loadtxt(filename)
     x = data[:,0]
     y1 = data[:,1]
