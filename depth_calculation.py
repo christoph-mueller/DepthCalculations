@@ -31,48 +31,12 @@ def calculate_depth_simple(B, rho):
     return d
     
     
-def get_data(filename):
+def get_data(filename, data_columns):
     #TODO: needs to be implemented in a good and robust way
     data = np.loadtxt(filename)
     x = data[:,0]
-    y = data[:,1]
-    return x, y
-    
-
-    def load_file(self, filepath):
-        """ loads the data from a file that has a 2 column structure
-            ignores the first linestoignore lines of this file """
-        x, y, xx, yy = self.read_data(filepath)
-        return x, y, xx, yy
-        
-    
-    def read_data(self, filepath):
-        """importing data from a file"""
-        isAlternating = False
-        x = []
-        y = []
-        xx = []
-        yy = []
-        inp = open (filepath,'rb')
-        check = inp.readline()  
-        check_new = check.split()
-        if len(check_new) > 5:
-            isAlternating = True            
-        inp.seek(0)       #moves the cursor back to the beginning of the file
-        i = 0
-        for line in inp:
-            i += 1
-            if i > self.linestoignore:
-                numbers = map(float, line.split())
-                x.append(numbers[0])          # now x is in microseconds
-                y.append(numbers[1]*1e3)                    
-                if isAlternating:
-                    if check_new[3] == 'Fit':
-                        xx.append(numbers[3])     # now xx is in microseconds
-                        yy.append(numbers[4]*1e3)                        
-                    else:
-                        xx.append(numbers[2])     # now yy is in microseconds
-                        yy.append(numbers[3]*1e3)
-        inp.close()
-        #checken, ob  len(x) = len(xx)
-        return x, y, xx, yy
+    y1 = data[:,1]
+    if data_columns == 3:
+        y2 = data[:,2]
+        return x, y1, y2
+    return x, y1
