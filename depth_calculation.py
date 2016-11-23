@@ -3,6 +3,12 @@
 import numpy as np
 
 
+def do_normalisation(y_raw, rabi_amplitude, rabi_offset):
+    '''data normalization'''
+    y_norm = 1-(rabi_offset + rabi_amplitude - y_raw)/(2*rabi_amplitude)
+    return y_norm
+
+
 def nu_from_tau(x):
     '''calculates the frequency nu for given values of tau'''
     nu = []
