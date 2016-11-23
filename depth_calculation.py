@@ -28,13 +28,20 @@ def S_from_data(tau, y, gamma_e, N):
     return S
 
 
-def calculate_depth_simple(B, rho):
-    '''gets B in T, returns d in nm'''
-    mu_0 = 1.256e-6
-    mu_p = 2*2.79*5.0507866*1e-27
-    d = (rho * mu_0 * mu_0 * mu_p * mu_p * 5 / (1536 * np.pi * B * B))**(1./3)
+def calculate_depth_simple(mu_0, h, B, gamma_n, rho):
+    rho *= 1e27
+    '''gets rho in 1/nm^3 and B in T, returns d in nm'''
+    d = (rho * mu_0 * mu_0 * h * h * gamma_n * gamma_n * 5 / (1536 * np.pi * B * B))**(1./3)
     d = d*1e9
     return d
+
+
+def calculate_density_simple(mu_0, h, B, gamma_n, d):
+    '''gets d in nm and B in T, returns rho in 1/nm^3'''
+    d /= 1e9
+    rho = d**3 * 1536 * np.pi * B * B / (5 * mu_0 * mu_0 * h * h * gamma_n * gamma_n)
+    rho /= 1e27
+    return rho
     
     
 def get_data(filename, data_columns):
